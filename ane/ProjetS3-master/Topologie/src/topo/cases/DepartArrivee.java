@@ -23,4 +23,12 @@ public class DepartArrivee extends Case {
 			}
 			return r;
 	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(new DepartArrivee(5).getCouleur());
+		System.out.println(new DepartArrivee(5).getHauteur() << 16);
+		System.out.println(new DepartArrivee(5).getHauteur() << 16 & 0x00FF0000);
+		System.out.println(((0 << 8) & 0x0000FF00) + " " + (0 & 0x000000FF));
+	}
 }

@@ -22,7 +22,7 @@ import topo.cases.Tunnel;
 
 public class Topo {
 
-	private Case[][] image;
+	public Case[][] image;
 
 	public Topo(int x, int y) {
 		this.image = new Case[x][y];
@@ -33,11 +33,11 @@ public class Topo {
 		}
 	}
 
-	public void ajoutPic(float hauteur, int x, int y, float pente) {
+	public void ajoutPic(float hauteur, int x, int y, float pente) { //crée un pic d'hauteur hauteur, et si c'est possible crée des pics autour en prenant en compte pente
 		if (hauteur > 0 && x >= 0 && x < this.image.length && y >= 0 && y < this.image.length
 				&& this.image[x][y].getHauteur() <= hauteur) {
 
-			int temp = (int) ((hauteur - (hauteur * pente)) / 2 + (hauteur * pente));
+			int temp = (int) ((hauteur - (hauteur * pente)) / 2 + (hauteur * pente)); //calcule la prochaine hauteur 
 			this.image[x][y].setHauteur((int) hauteur);
 
 			ajoutPic(temp, x + 1, y, pente);
@@ -88,7 +88,7 @@ public class Topo {
 		}
 	}
 
-	public void ajoutPente(int x1, int y1, int x2, int y2, int nb) {
+	public void ajoutPente(int x1, int y1, int x2, int y2, int nb) { //set la hauteur d'un rectangle ABCD à nb, on donne en paramètre A et C
 		for (int x = x1; x < x2 + 1; x++) {
 			for (int y = y1; y < y2 + 1; y++) {
 				this.image[x][y].setHauteur(nb);
@@ -96,8 +96,8 @@ public class Topo {
 		}
 	}
 
-	public void ajoutRiviere(int x, int y) {
-		// pas d'image vide
+	public void ajoutRiviere(int x, int y) { //crée une rivière, a chaque itération place une case rivière a la case la plus base en altitude
+		// pas d'image vide					//si la rivière arrive au bord de TOPO ou dans un creux, elle sarrète
 		this.image[x][y] = new Riviere(this.image[x][y].getHauteur());
 
 		int[] caseVoisines = new int[4];
@@ -159,7 +159,7 @@ public class Topo {
 
 		try {
 			File f = new File(nom + ".png");
-			ImageIO.write(img, "png", f);
+			ImageIO.write(img, "PNG", f);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -189,7 +189,7 @@ public class Topo {
 	public static Topo topoAleatoire() {
 		Topo topo = new Topo(320, 320);
 		topo.genererTopologie();
-		topo.toFile("topo");
+		topo.toFile(FileSystemView.getFileSystemView().getRoots()[0] + "\\topo");
 		return topo;
 	}
 
@@ -438,7 +438,7 @@ public class Topo {
 		Algo algo = new Algo(topo, d, a, diff);
 		algo.path((int) tunnel / base, (int) pont / base);
 		this.dessinerChemin(algo, algo.faireRoute());
-		this.toFile("topo");
+		this.toFile(FileSystemView.getFileSystemView().getRoots()[0] + "\\topo");
 	}
 
 	private void dessinerChemin(Algo algo, List<CasePathfinding> path) {

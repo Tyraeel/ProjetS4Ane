@@ -30,11 +30,11 @@ public class Fenetre extends JFrame {
 	private JTextField cheminFichier = new JTextField(); // JLabel du chemin du
 															// fichier
 	
-	//Les diffï¿½rentes configurations avec des valeurs par dï¿½fault
+	//Les différentes configurations avec des valeurs par défault
 	private JTextField tfConfigChoix1 = new JTextField("1"); //Base
 	private JTextField tfConfigChoix2 = new JTextField("5"); //Creuser
 	private JTextField tfConfigChoix3 = new JTextField("3"); //Pont
-	private JTextField tfConfigChoix4 = new JTextField("10"); //Diffï¿½rence de niveau
+	private JTextField tfConfigChoix4 = new JTextField("10"); //Différence de niveau
 	
 	private int tabValeursConfig[] = new int[4];
 	
@@ -42,12 +42,12 @@ public class Fenetre extends JFrame {
 
 	public Fenetre() {
 
-		this.setTitle("L'ï¿½ne");
+		this.setTitle("L'âne");
 		this.setSize(800, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
-		JButton buttonGenerate = new JButton("Topologie alï¿½atoire");
+		JButton buttonGenerate = new JButton("Topologie aléatoire");
 		JButton buttonChange = new JButton("Donner une Topologie");
 
 		JPanel b2 = new JPanel();
@@ -88,17 +88,17 @@ public class Fenetre extends JFrame {
 			
 			switch (i) {
 			case 0:
-				labelConfigChoixTemp.setText("Prix du mï¿½tre");
+				labelConfigChoixTemp.setText("Prix du mètre");
 				panelConfigChoixTemp.add(labelConfigChoixTemp);
 				panelConfigChoixTemp.add(this.tfConfigChoix1);
 				break;
 			case 1:
-				labelConfigChoixTemp.setText("Prix supplï¿½mentaire pour creuser");
+				labelConfigChoixTemp.setText("Prix supplémentaire pour creuser");
 				panelConfigChoixTemp.add(labelConfigChoixTemp);
 				panelConfigChoixTemp.add(this.tfConfigChoix2);
 				break;
 			case 2:
-				labelConfigChoixTemp.setText("Prix d'un mï¿½tre de pont");
+				labelConfigChoixTemp.setText("Prix d'un mètre de pont");
 				panelConfigChoixTemp.add(labelConfigChoixTemp);
 				panelConfigChoixTemp.add(this.tfConfigChoix3);
 				break;
@@ -173,12 +173,12 @@ public class Fenetre extends JFrame {
 		// Pour l'ecran d'execution
 		JPanel executePanel = new JPanel();
 		JLabel executeLabel1 = new JLabel("");
-		JLabel executeLabel2 = new JLabel("Rï¿½sultat:");
+		JLabel executeLabel2 = new JLabel("Résultat:");
 
 		String stringCheminFichier = FileSystemView.getFileSystemView().getRoots()[0].toString() + "\\topo.png";
 
 		if (this.cheminFichier.getText().isEmpty()) {
-			executeLabel1.setText("L'image se trouve ï¿½ '" + stringCheminFichier + "' ");
+			executeLabel1.setText("L'image se trouve à '" + stringCheminFichier + "' ");
 			executePanel.add(executeLabel1);
 		}
 
@@ -189,7 +189,7 @@ public class Fenetre extends JFrame {
 		executePanel.add(executeLabel2);
 
 		try {
-			myPicture = ImageIO.read(new File("topo.png"));
+			myPicture = ImageIO.read(new File(stringCheminFichier));
 
 			BufferedImage scaledImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
 
@@ -221,10 +221,10 @@ public class Fenetre extends JFrame {
 
 		if (this.cheminFichier.getText().isEmpty()) {
 			this.topologie = Topo.topoAleatoire();
-			generateLabel.setText("L'image se trouve ï¿½ '" + stringCheminFichier + "' ");
+			generateLabel.setText("L'image se trouve à '" + stringCheminFichier + "' ");
 		} else {
 			stringCheminFichier = this.cheminFichier.getText();
-			generateLabel.setText("Votre image sera modifiï¿½e");
+			generateLabel.setText("Votre image sera modifiée");
 			this.topologie.importerTopologie(stringCheminFichier);
 		}
 
@@ -237,7 +237,7 @@ public class Fenetre extends JFrame {
 		generatePanel.add(generateLabel);
 
 		try {
-			myPicture = ImageIO.read(new File("topo.png"));
+			myPicture = ImageIO.read(new File(stringCheminFichier));
 
 			BufferedImage scaledImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
 
@@ -260,7 +260,7 @@ public class Fenetre extends JFrame {
 
 		if (this.cheminFichier.getText().isEmpty()) {
 
-			JButton retry = new JButton("Re-gï¿½nï¿½rer");
+			JButton retry = new JButton("Re-générer");
 
 			retry.addActionListener(new ItemActionGenerate());
 

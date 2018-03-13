@@ -17,7 +17,7 @@ public class Pont extends Case {
 		int r = 0;
 
 		for (int i = 1; i < 256; i++) {
-			if (rgb == new Tunnel(i).getCouleur()) {
+			if (rgb == new Pont(i).getCouleur()) {
 				r = i;
 			}
 		}
