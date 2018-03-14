@@ -17,11 +17,4 @@ public abstract class Case {
 	}
 	
 	public abstract int getCouleur();
-	
-	public boolean equals(Object obj){
-		if(obj == null || !(obj instanceof Case))
-			return false;
-		else
-			return this.hauteur == ((Case) obj).hauteur;
-	}
 }

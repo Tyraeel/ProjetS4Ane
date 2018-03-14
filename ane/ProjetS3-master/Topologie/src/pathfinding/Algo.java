@@ -5,10 +5,10 @@ import java.util.List;
 public class Algo {
 	public TopoPathfinding topo;
 	int[] d; //depart
-	int[] a; //arrivée;
+	int[] a; //arrivï¿½e;
 	CasePathfinding c; //current
-	List<CasePathfinding> open = new ArrayList<CasePathfinding>(); // cases à traiter
-	List<CasePathfinding> close = new ArrayList<CasePathfinding>(); // cases traitées
+	List<CasePathfinding> open = new ArrayList<CasePathfinding>(); // cases ï¿½ traiter
+	List<CasePathfinding> close = new ArrayList<CasePathfinding>(); // cases traitï¿½es
 	//variables d'informations
 	int tourDeTest;
 	private int diffHauteur;
@@ -20,7 +20,7 @@ public class Algo {
 		this.diffHauteur = diffHauteur;
 	};
 	
-	public void executerAlgo(int prixP, int prixT) {
+	public void executerAlgo(int prixP, int prixT) { 
 		if (this.path(prixP, prixT)) {
 			this.affichageInformatif(this.faireRoute());
 		} else {
@@ -29,7 +29,7 @@ public class Algo {
 	}
 	
 	 
-	public boolean path(int prixP, int prixT){
+	public boolean path(int prixP, int prixT){ //INTESTABLE, beaucoup trop long, Ã  redÃ©couper en sous fonctions ?
 		
 		this.topo.find(d[0], d[1]).x = d[0];
 		this.topo.find(d[0], d[1]).y = d[1];
@@ -52,9 +52,9 @@ public class Algo {
 		int multiplieurH = 1;
 
 		
-		while(!this.open.isEmpty() && !cheminTrouve){ // tant qu'il reste des cases à traiter (open list) et que le chemin n'a pas déja été trouvé
+		while(!this.open.isEmpty() && !cheminTrouve){ // tant qu'il reste des cases ï¿½ traiter (open list) et que le chemin n'a pas dï¿½ja ï¿½tï¿½ trouvï¿½
 			
-			tourDeTest++; // pour compter le nombre de tour de l'algo (à titre informatif)
+			tourDeTest++; // pour compter le nombre de tour de l'algo (ï¿½ titre informatif)
 			
 		    for(int i = 0; i <this.open.size() ; i++){  // on prend la case avec le F minimum
 		    	this.c = this.open.get(i);
@@ -71,14 +71,14 @@ public class Algo {
 			minF = 0;
 			IDminF = 0;
 			
-			//~~~~~ case à gauche ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			//~~~~~ case ï¿½ gauche ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-			if(this.c.x != 0 && !this.close.contains(this.topo.find(this.c.x-1,this.c.y)) && Math.abs(this.c.getNiv() - this.topo.find(this.c.x-1,this.c.y).getNiv())<this.diffHauteur ){ //si la case ne dépasse pas de la matrice et n'est pas dans la close list et est accessible
+			if(this.c.x != 0 && !this.close.contains(this.topo.find(this.c.x-1,this.c.y)) && Math.abs(this.c.getNiv() - this.topo.find(this.c.x-1,this.c.y).getNiv())<this.diffHauteur ){ //si la case ne dï¿½passe pas de la matrice et n'est pas dans la close list et est accessible
 	
 				//calcule case ==========================================================|
-				if( this.open.contains(this.topo.find(this.c.x-1,this.c.y)) && this.topo.find(this.c.x-1,this.c.y).G < this.c.G + 1){ // si elle est deja dans l'open list et que son G est plus interessant que c.G +1 alors il existe deja un chemin pour cette case plus optimisé
+				if( this.open.contains(this.topo.find(this.c.x-1,this.c.y)) && this.topo.find(this.c.x-1,this.c.y).G < this.c.G + 1){ // si elle est deja dans l'open list et que son G est plus interessant que c.G +1 alors il existe deja un chemin pour cette case plus optimisï¿½
 				}else{
-					this.open.remove(this.topo.find(this.c.x-1,this.c.y)); // on enlève la case de l'open list car on recalcule ses variables
+					this.open.remove(this.topo.find(this.c.x-1,this.c.y)); // on enlï¿½ve la case de l'open list car on recalcule ses variables
 					this.topo.find(this.c.x-1,this.c.y).x = this.c.x-1;
 					this.topo.find(this.c.x-1,this.c.y).y = this.c.y;
 					this.topo.find(this.c.x-1,this.c.y).parent = this.c;
@@ -90,7 +90,7 @@ public class Algo {
 				
 			}else if (this.c.x != 0 && !this.close.contains(this.topo.find(this.c.x-1,this.c.y))){ //pont/tunel	
 				
-				longueurPont = 2; //remise à 2 longueurPont (variable aussi utilisé pour le tunel)
+				longueurPont = 2; //remise ï¿½ 2 longueurPont (variable aussi utilisï¿½ pour le tunel)
 				
 				if((this.c.getNiv() - this.topo.find(this.c.x-1,this.c.y).getNiv()) > this.diffHauteur){ // pont
 					prix = prixPont;
@@ -107,9 +107,9 @@ public class Algo {
 					}
 				}
 				//calcule case (pont/tunel) eventuel =========================================|
-				if(this.open.contains(this.topo.find(this.c.x-longueurPont,this.c.y)) && this.topo.find(this.c.x-longueurPont,this.c.y).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisé
+				if(this.open.contains(this.topo.find(this.c.x-longueurPont,this.c.y)) && this.topo.find(this.c.x-longueurPont,this.c.y).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisï¿½
 				}else if(!this.close.contains(this.topo.find(this.c.x-longueurPont,this.c.y))){
-					this.open.remove(this.topo.find(this.c.x-longueurPont,this.c.y)); // on enlève la case de l'open list car on recalcule ses variables
+					this.open.remove(this.topo.find(this.c.x-longueurPont,this.c.y)); // on enlï¿½ve la case de l'open list car on recalcule ses variables
 					this.topo.find(this.c.x-longueurPont,this.c.y).x = this.c.x-longueurPont;
 					this.topo.find(this.c.x-longueurPont,this.c.y).y = this.c.y;
 					this.topo.find(this.c.x-longueurPont,this.c.y).parent = this.c;
@@ -141,7 +141,7 @@ public class Algo {
 				
 			}else if (this.c.y != 0 && !this.close.contains(this.topo.find(this.c.x,this.c.y-1))){ //pont/tunel	
 				
-				longueurPont = 2; //remise à 2 longueurPont (variable aussi utilisé pour le tunel)
+				longueurPont = 2; //remise ï¿½ 2 longueurPont (variable aussi utilisï¿½ pour le tunel)
 				
 				if((this.c.getNiv() - this.topo.find(this.c.x,this.c.y-1).getNiv()) > this.diffHauteur){ // pont
 					prix = prixPont;
@@ -157,9 +157,9 @@ public class Algo {
 					}
 				}
 				//calcule case (pont/tunel) eventuel ==========================================|
-				if( this.open.contains(this.topo.find(this.c.x,this.c.y-longueurPont)) && this.topo.find(this.c.x,this.c.y-longueurPont).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisé
+				if( this.open.contains(this.topo.find(this.c.x,this.c.y-longueurPont)) && this.topo.find(this.c.x,this.c.y-longueurPont).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisï¿½
 				}else if(!this.close.contains(this.topo.find(this.c.x,this.c.y-longueurPont))){
-					this.open.remove(this.topo.find(this.c.x,this.c.y-longueurPont)); // on enlève la case de l'open list car on recalcule ses variables
+					this.open.remove(this.topo.find(this.c.x,this.c.y-longueurPont)); // on enlï¿½ve la case de l'open list car on recalcule ses variables
 					this.topo.find(this.c.x,this.c.y-longueurPont).x = this.c.x;
 					this.topo.find(this.c.x,this.c.y-longueurPont).y = this.c.y-longueurPont;
 					this.topo.find(this.c.x,this.c.y-longueurPont).G =  this.c.G + (prix*longueurPont);
@@ -171,7 +171,7 @@ public class Algo {
 				}// fin calcule case ==========================================================|
 			}
 			
-			//~~~~~ case à droite ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			//~~~~~ case ï¿½ droite ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			
 			if(this.c.x != this.topo.largeur-1 && !this.close.contains(this.topo.find(this.c.x+1,this.c.y))&& Math.abs(this.c.getNiv() - this.topo.find(this.c.x+1,this.c.y).getNiv())<this.diffHauteur){
 				
@@ -190,7 +190,7 @@ public class Algo {
 				
 			}else if (this.c.x != this.topo.largeur-1 && !this.close.contains(this.topo.find(this.c.x+1,this.c.y))){ //pont/tunel	
 				
-				longueurPont = 2; //remise à 2 longueurPont (variable aussi utilisé pour le tunel)
+				longueurPont = 2; //remise ï¿½ 2 longueurPont (variable aussi utilisï¿½ pour le tunel)
 				
 				if((this.c.getNiv() - this.topo.find(this.c.x+1,this.c.y).getNiv()) > this.diffHauteur){ // pont
 					prix = prixPont;
@@ -207,9 +207,9 @@ public class Algo {
 					}
 				}
 				//calcule case (pont/tunel) eventuel =========================================|
-				if( this.open.contains(this.topo.find(this.c.x+longueurPont,this.c.y)) && this.topo.find(this.c.x+longueurPont,this.c.y).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisé
+				if( this.open.contains(this.topo.find(this.c.x+longueurPont,this.c.y)) && this.topo.find(this.c.x+longueurPont,this.c.y).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisï¿½
 				}else if(!this.close.contains(this.topo.find(this.c.x+longueurPont,this.c.y))){
-					this.open.remove(this.topo.find(this.c.x+longueurPont,this.c.y)); // on enlève la case de l'open list car on recalcule ses variables
+					this.open.remove(this.topo.find(this.c.x+longueurPont,this.c.y)); // on enlï¿½ve la case de l'open list car on recalcule ses variables
 					this.topo.find(this.c.x+longueurPont,this.c.y).x = this.c.x+longueurPont;
 					this.topo.find(this.c.x+longueurPont,this.c.y).y = this.c.y;
 					this.topo.find(this.c.x+longueurPont,this.c.y).parent = this.c;
@@ -239,7 +239,7 @@ public class Algo {
 				}
 			}else if (this.c.y != this.topo.hauteur-1 && !this.close.contains(this.topo.find(this.c.x,this.c.y+1))){ //pont/tunel	
 				
-				longueurPont = 2; //remise à 2 longueurPont (variable aussi utilisé pour le tunnel)
+				longueurPont = 2; //remise ï¿½ 2 longueurPont (variable aussi utilisï¿½ pour le tunnel)
 				
 				if((this.c.getNiv() - this.topo.find(this.c.x,this.c.y+1).getNiv()) > this.diffHauteur){ // pont
 					prix = prixPont;
@@ -255,9 +255,9 @@ public class Algo {
 					}
 				}
 				//calcule case (pont/tunel) eventuel ==========================================|
-				if( this.open.contains(this.topo.find(this.c.x,this.c.y+longueurPont )) && this.topo.find(this.c.x,this.c.y+longueurPont ).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisé
+				if( this.open.contains(this.topo.find(this.c.x,this.c.y+longueurPont )) && this.topo.find(this.c.x,this.c.y+longueurPont ).G < this.c.G + (prix*longueurPont)){ // si elle est deja dans l'open list et que son G est plus interessant que c.G + prix du pont alors il existe deja un chemin pour cette case plus optimisï¿½
 				}else if(!this.close.contains(this.topo.find(this.c.x,this.c.y+longueurPont))){
-					this.open.remove(this.topo.find(this.c.x,this.c.y+longueurPont )); // on enlève la case de l'open list car on recalcule ses variables
+					this.open.remove(this.topo.find(this.c.x,this.c.y+longueurPont )); // on enlï¿½ve la case de l'open list car on recalcule ses variables
 					this.topo.find(this.c.x,this.c.y+longueurPont ).x = this.c.x;
 					this.topo.find(this.c.x,this.c.y+longueurPont ).y = this.c.y+longueurPont ;
 					this.topo.find(this.c.x,this.c.y+longueurPont ).G =  this.c.G + (prix*longueurPont);
@@ -271,7 +271,7 @@ public class Algo {
 			
 			
 			
-			if(this.c.x == a[0] && this.c.y == a[1]){       // cas d'arrêt
+			if(this.c.x == a[0] && this.c.y == a[1]){       // cas d'arrï¿½t
 				this.tourDeTest = tourDeTest;
 				cheminTrouve = true;
 			}else{
@@ -304,9 +304,20 @@ public class Algo {
 		    	System.out.println("[" + n.x + n.y +"]" + " -> ");
 
 			}
-	    	System.out.println("arrivée ! (longueur du chemin : " + optimal.size() + " coût du chemin "+this.topo.find(a[0],a[1]).F +" )");
-	    	System.out.println("Pour ce résultat l'algo à fait " + this.tourDeTest + " tests");
+	    	System.out.println("arrivï¿½e ! (longueur du chemin : " + optimal.size() + " coï¿½t du chemin "+this.topo.find(a[0],a[1]).F +" )");
+	    	System.out.println("Pour ce rï¿½sultat l'algo ï¿½ fait " + this.tourDeTest + " tests");
 		
+	}
+	
+	//ajout pour tests
+	public void setC(CasePathfinding c)
+	{
+		this.c = c;
+	}
+	
+	public CasePathfinding getC()
+	{
+		return this.c;
 	}
 	
 }

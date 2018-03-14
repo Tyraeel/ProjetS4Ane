@@ -179,11 +179,14 @@ public class Topo {
 	}
 
 	public static void main(String[] args) {
-		Topo nouvelle = new Topo(128, 128);
-		nouvelle.genererTopologie();
-		nouvelle.toFile("test");
-		nouvelle.importerTopologie("test.png");
-		nouvelle.toFile("test2");
+//		Topo nouvelle = new Topo(128, 128);
+//		nouvelle.genererTopologie();
+//		nouvelle.toFile("test");
+//		nouvelle.importerTopologie("test.png");
+//		nouvelle.toFile("test2");
+		Topo topo = new Topo(5, 5);
+		topo.genererTopologie();
+		topo.toFile("cdelamerde");
 	}
 
 	public static Topo topoAleatoire() {
@@ -212,7 +215,7 @@ public class Topo {
 
 		this.genererAleatoirementRivieres();
 
-		this.ajoutDepartArrivee();
+		this.ajoutDepartArrivee();	
 		
 		this.ajoutFakeRiviere();
 	}
